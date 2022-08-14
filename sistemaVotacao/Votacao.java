@@ -1,22 +1,20 @@
-package sistemaVotacao;
+
 import java.util.Date;
 
 public class Votacao {
-    String idVotacao;
-    String nomeVotacao;
-    String infoAdicionalVotacao;
-    String criadoPor;
-    Date dataCriacaoVotacao;
-    Date dataInicial;
-    Date dataFinal;
-    String[] canditos;
-    String[] votos;
-    String[] resultadoFinal;
+    private String idVotacao;
+    public String nomeVotacao;
+    public String infoAdicionalVotacao;
+    private String criadoPor;
+    public Date dataCriacaoVotacao;
+    public Date dataInicial;
+    public Date dataFinal;
+    public String[] canditos;
+    public String[] votos;
+    public String[] resultadoFinal;
 
-     public static void main(String[] args){
-        Usuario u1 = new Usuario("test1", "test1@gmail.com", "senha1");
-        u1.status();
-    }
+
+
 
     //metodos dessa classe, não sei se vão ficar aqui mesmo
     // void criarVotacao(Votacao p){}
