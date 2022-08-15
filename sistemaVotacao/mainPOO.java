@@ -1,5 +1,5 @@
-
-//import javax.lang.model.util.ElementScanner14;
+package sistemaVotacao.*;
+import javax.lang.model.util.ElementScanner14;
 import java.util.Scanner;
 
 
