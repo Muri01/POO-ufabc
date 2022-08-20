@@ -52,6 +52,9 @@ public class Usuario {
         // } 
     }
 
+    public Usuario(String string, String string2, boolean b) {
+    }
+
     //metodo pra testar imprimir as informações da classe
     public void status() {
         System.out.println("Informações do usuário");

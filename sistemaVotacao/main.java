@@ -26,7 +26,7 @@ public class main {
             Senha = scan.nextLine();
         }
 
-        if (VerificaADM(Usuario, Flag)) {
+        if (VerificaADM(Usuario)) {
             while (!Controle1.equals("4")) {
                 Controle2 = "0";
                 System.out.println("Gerenciar Candidatos: 1");
@@ -163,7 +163,7 @@ public class main {
         return false;
     }
 
-    public static Boolean VerificaADM(String U, String F) {
+    public static Boolean VerificaADM(String U) {
         try {
             String buscaUsuarioAdmin, flagAdmin;
             String array[] = new String[7];
