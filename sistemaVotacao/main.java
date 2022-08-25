@@ -2,13 +2,39 @@
 //import javax.lang.model.util.ElementScanner14;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.lang.NumberFormatException;
 
 public class main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        String buscaUsuario;
+        String array[] = new String[3];
+
+        File file = new File(
+                "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
+
+        RandomAccessFile raf = new RandomAccessFile(file, "rw");
+        // buscaUsuario = raf.readLine();
+        // array = buscaUsuario.split(",");
+        // int tamanho = raf.length().parseInt();
+        // Usuario[] usuarios = new Usuario[Integer.parseInt(raf.length())];
+        // Usuario[] usuarios = new Usuario[3];
+
+        while (raf.getFilePointer() < raf.length()) {
+            buscaUsuario = raf.readLine();
+            array = buscaUsuario.split(",");
+        Usuario[] usuarios = new Usuario[2];
+        Usuario U1 = new Usuario("nome124","senha",true);
+        Usuario U2  = new Usuario("nome124","senha",true);
+        usuarios[0] = U1;
+        usuarios[1] = U2;
+
+        System.out.println(usuarios[0].nomeUsuario);
+        
+        
         Scanner scan = new Scanner(System.in);
         String Usuario, Senha, Flag, Controle1 = "0", Controle2 = "0";
 
@@ -124,11 +150,10 @@ public class main {
                     // chama função votar
                 }
             }
-
         }
-    }
+    }}
 
-    public static Boolean Autenticao(String U, String S) {
+    private static Boolean Autenticao(String U, String S) {
         try {
             String buscaUsuario;
             String array[] = new String[7];
@@ -137,8 +162,6 @@ public class main {
                     "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
 
             RandomAccessFile raf = new RandomAccessFile(file, "rw");
-            // buscaUsuario = raf.readLine();
-            // array = buscaUsuario.split(",");
 
             while (raf.getFilePointer() < raf.length()) {
                 buscaUsuario = raf.readLine();
@@ -163,7 +186,7 @@ public class main {
         return false;
     }
 
-    public static Boolean VerificaADM(String U) {
+    private static Boolean VerificaADM(String U) {
         try {
             String buscaUsuarioAdmin, flagAdmin;
             String array[] = new String[7];
