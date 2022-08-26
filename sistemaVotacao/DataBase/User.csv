@@ -1,4 +1,4 @@
-ID,nome,senha,email,data de criação, criado por, flagAdmin
-1,user,senha,user@ufabc.com.br
-2,humberto,admin,humberto@ufabc.com.br
-3,murilo,admin,murilo@ufabc.com.br,
+nome,senha,flag
+user,senha,true
+humberto,admin,true
+murilo,admin,false

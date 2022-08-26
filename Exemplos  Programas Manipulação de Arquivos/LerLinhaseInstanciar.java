@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.lang.NumberFormatException;
 
 public class LerLinhaseInstanciar {
 
@@ -35,10 +34,10 @@ public class LerLinhaseInstanciar {
             Usuario[] usuarios = new Usuario[count];
 
             
-            Usuario U1 = new Usuario("nome124","senha",true);
-            Usuario U2  = new Usuario("nome124","senha",true);
-            usuarios[0] = U1;
-            usuarios[1] = U2;
+            // Usuario U1 = new Usuario("nome124","senha",true);
+            // Usuario U2  = new Usuario("nome124","senha",true);
+            // usuarios[0] = U1;
+            // usuarios[1] = U2;
 
     
 
@@ -48,7 +47,7 @@ public class LerLinhaseInstanciar {
                 // reading line from the file.
                 nameNumberString = raf.readLine();
                 array = nameNumberString.split(",");
-                usuarios[count2] = new Usuario(array[0], array[1], Boolean.parseBoolean(array[2]));
+                // usuarios[count2] = new Usuario(array[0], array[1], Boolean.parseBoolean(array[2]));
                 System.out.println(nameNumberString);
                 count2 += 1;
             }
