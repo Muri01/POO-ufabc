@@ -1,6 +1,7 @@
 {
     "java.project.sourcePaths": [
         "sistemaVotacao",
-        "Exemplos  Programas Manipulação de Arquivos"
+        "Exemplos  Programas Manipulação de Arquivos",
+        "CriarInstanciarObjetos"
     ]
 }

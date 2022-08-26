@@ -1,203 +1,165 @@
-
-//import javax.lang.model.util.ElementScanner14;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.lang.NumberFormatException;
+import java.util.ArrayList;
 
 public class main {
 
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String Usuario, Senha, Flag, Controle1 = "0", Controle2 = "0";
+    public static void main(String[] args) throws IOException {
+        ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+        String linhaUsuario[], nome, senha, flag, Controle1 = "0", Controle2 = "0";
+        File file = new File(
+                "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
+        RandomAccessFile raf = new RandomAccessFile(file, "rw");
+        try (Scanner scan = new Scanner(System.in)) {
+            //instanciar todos os usuarios usuario a guardar em listaUsuarios
+            while (raf.getFilePointer() < raf.length()) { 
+                linhaUsuario = raf.readLine().split(",");
+                nome = linhaUsuario[0];
+                senha = linhaUsuario[1];
+                flag = linhaUsuario[2];
 
-        // autenticação
-        System.out.println("Insira o seu nome de Usuário: ");
-        Usuario = scan.nextLine();
-        System.out.println("Insira sua Senha: ");
-        Senha = scan.nextLine();
+                Usuario U = new Usuario(nome, senha, flag);
+                listaUsuarios.add(U);
+            }
 
-        while (!Autenticao(Usuario, Senha)) {
-            System.out.println("Credenciais incorretas, insira novamente seu usuario e senha: ");
+
+            //processo de perguntar o login
             System.out.println("Insira o seu nome de Usuário: ");
-            Usuario = scan.nextLine();
+            nome = scan.nextLine();
             System.out.println("Insira sua Senha: ");
-            Senha = scan.nextLine();
-        }
+            senha = scan.nextLine();
 
-        if (VerificaADM(Usuario, Flag)) {
-            while (!Controle1.equals("4")) {
-                Controle2 = "0";
-                System.out.println("Gerenciar Candidatos: 1");
-                System.out.println("Gerenciar Votações: 2");
-                System.out.println("Gerenciar Usuários: 3");
-                System.out.println("Sair: 4");
-                System.out.println("");
-
-                Controle1 = scan.nextLine();
-
-                if (Controle1.equals("1")) {
-
-                    while (!Controle2.equals("4")) {
-                        System.out.println("Adicionar Candidado: 1");
-                        System.out.println("Excluir Candidato: 2");
-                        System.out.println("Sair: 4");
-                        System.out.println("");
-
-                        Controle2 = scan.nextLine();
-
-                        if (Controle2.equals("1")) {
-                            System.out.println("Executou função adicionar  candidato");
-                            // função adicionar candidato
-                        } else if (Controle2.equals("2")) {
-                            System.out.println("Executou função excluir candidato");
-                            // função excluir candidato
-                        }
-                    }
-
-                }
-
-                else if (Controle1.equals("2")) {
-                    while (!Controle2.equals("4")) {
-                        System.out.println("Adicionar Votação: 1");
-                        System.out.println("Excluir Votação: 2");
-                        System.out.println("Sair: 4");
-                        System.out.println("");
-                        Controle2 = scan.nextLine();
-                        if (Controle2.equals("1")) {
-                            System.out.println("Executou função adicionar  Votação");
-                            // função adicionar Votação
-                        } else if (Controle2.equals("2")) {
-                            System.out.println("Executou função excluir  Votação");
-                            // função excluir Votação
-                        }
-                    }
-
-                } else if (Controle1.equals("3")) {
-                    while (!Controle2.equals("4")) {
-                        System.out.println("Adicionar Usuário: 1");
-                        System.out.println("Excluir Usuário: 2");
-                        System.out.println("Sair: 4");
-                        System.out.println("");
-                        Controle2 = scan.nextLine();
-                        if (Controle2.equals("1")) {
-                            System.out.println("Executou adição de usuario");
-                            // adiciona usuario
-                        } else if (Controle2.equals("2")) {
-                            System.out.println("Executou exclusão");
-                            // função excluir usuário
-
-                        }
-                    }
-
-                }
-
-                else if (Controle1.equals("3")) {
-                    while (!Controle2.equals("4")) {
-                        System.out.println("Votar: 1 ");
-                        System.out.println("Sair: 4");
-                        System.out.println("");
-                        Controle2 = scan.nextLine();
-                        if (Controle2.equals("1")) {
-                            System.out.println("Executou função votar");
-                            // chama função votar
-                        }
-                    }
-
-                }
-            }
-        } else {
-            while (!Controle2.equals("4")) {
-                System.out.println("Votar: 1 ");
-                System.out.println("Cosultar resultados: 2");
-                System.out.println("Sair da aplicacao: 4");
-                System.out.println("");
-                Controle2 = scan.nextLine();
-
-                if (Controle2.equals("1")) {
-                    System.out.println("Executou função voltar");
-                    // chama função votar
-
-                } else if (Controle2.equals("2")) {
-                    System.out.println("Executou função consultar resultados");
-                    // chama função votar
-                }
+            //AUTENTICAÇÃO
+            while (!Autenticao(listaUsuarios, nome, senha)) {
+                System.out.println("Credenciais incorretas, insira novamente seu usuario e senha: ");
+                System.out.println("Insira o seu nome de Usuário: ");
+                nome = scan.nextLine();
+                System.out.println("Insira sua Senha: ");
+                senha = scan.nextLine();
             }
 
+            if (VerificaADM(listaUsuarios, nome)) {
+                while (!Controle1.equals("4")) {
+                    Controle2 = "0";
+                    System.out.println("Gerenciar Candidatos: 1");
+                    System.out.println("Gerenciar Votações: 2");
+                    System.out.println("Gerenciar Usuários: 3");
+                    System.out.println("Sair: 4");
+                    System.out.println("");
+
+                    Controle1 = scan.nextLine();
+
+                    if (Controle1.equals("1")) {
+
+                        while (!Controle2.equals("4")) {
+                            System.out.println("Adicionar Candidado: 1");
+                            System.out.println("Excluir Candidato: 2");
+                            System.out.println("Sair: 4");
+                            System.out.println("");
+
+                            Controle2 = scan.nextLine();
+
+                            if (Controle2.equals("1")) {
+                                System.out.println("Executou função adicionar  candidato");
+                                // função adicionar candidato
+                            } else if (Controle2.equals("2")) {
+                                System.out.println("Executou função excluir candidato");
+                                // função excluir candidato
+                            }
+                        }
+                    }
+
+                    else if (Controle1.equals("2")) {
+                        while (!Controle2.equals("4")) {
+                            System.out.println("Adicionar Votação: 1");
+                            System.out.println("Excluir Votação: 2");
+                            System.out.println("Sair: 4");
+                            System.out.println("");
+                            Controle2 = scan.nextLine();
+                            if (Controle2.equals("1")) {
+                                System.out.println("Executou função adicionar  Votação");
+                                // função adicionar Votação
+                            } else if (Controle2.equals("2")) {
+                                System.out.println("Executou função excluir  Votação");
+                                // função excluir Votação
+                            }
+                        }
+
+                    } else if (Controle1.equals("3")) {
+                        while (!Controle2.equals("4")) {
+                            System.out.println("Adicionar Usuário: 1");
+                            System.out.println("Excluir Usuário: 2");
+                            System.out.println("Sair: 4");
+                            System.out.println("");
+                            Controle2 = scan.nextLine();
+                            if (Controle2.equals("1")) {
+                                System.out.println("Executou adição de usuario");
+                                // adiciona usuario
+                            } else if (Controle2.equals("2")) {
+                                System.out.println("Executou exclusão");
+                                // função excluir usuário
+                            }
+                        }
+                    }
+
+                    else if (Controle1.equals("3")) {
+                        while (!Controle2.equals("4")) {
+                            System.out.println("Votar: 1 ");
+                            System.out.println("Sair: 4");
+                            System.out.println("");
+                            Controle2 = scan.nextLine();
+                            if (Controle2.equals("1")) {
+                                System.out.println("Executou função votar");
+                                // chama função votar
+                            }
+                        }
+
+                    }
+                }
+            } else {
+                while (!Controle2.equals("4")) {
+                    System.out.println("Votar: 1 ");
+                    System.out.println("Cosultar resultados: 2");
+                    System.out.println("Sair da aplicacao: 4");
+                    System.out.println("");
+                    Controle2 = scan.nextLine();
+
+                    if (Controle2.equals("1")) {
+                        System.out.println("Executou função VOTAR");
+                        // chama função votar
+
+                    } else if (Controle2.equals("2")) {
+                        System.out.println("Executou função consultar resultados");
+                        // chama função votar
+                    }
+                }
+
+            }
         }
     }
 
-    public static Boolean Autenticao(String U, String S) {
-        try {
-            String buscaUsuario;
-            String array[] = new String[7];
-
-            File file = new File(
-                    "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
-
-            RandomAccessFile raf = new RandomAccessFile(file, "rw");
-            // buscaUsuario = raf.readLine();
-            // array = buscaUsuario.split(",");
-
-            while (raf.getFilePointer() < raf.length()) {
-                buscaUsuario = raf.readLine();
-                array = buscaUsuario.split(",");
-                // System.out.println(array[1]);
-                // System.out.println(array[2]);
-
-                if (U.equals(array[1]) && S.equals(array[2])) {
-                    System.out.println("CADASTRO REALIZADO COM SUCESSO");
-                    return true;
-                }
-                // else{
-                // System.out.println("LOGIN ERRADO");
-                // return false;
-                // }
+    private static Boolean Autenticao(ArrayList<Usuario> listaUsuarios, String U, String S) {
+        for (int i=0; i < listaUsuarios.size(); i++) {
+            if (U.equals(listaUsuarios.get(i).nomeUsuario) && S.equals(listaUsuarios.get(i).senhaUsuario)){
+                System.out.println("CADASTRO REALIZADO COM SUCESSO");
+                return true;
             }
-        } catch (IOException ioe) {
-            System.out.println(ioe);
-            return false;
         }
         System.out.println("LOGIN ERRADO");
         return false;
     }
 
-    public static Boolean VerificaADM(String U, String F) {
-        try {
-            String buscaUsuarioAdmin, flagAdmin;
-            String array[] = new String[7];
-
-            File file = new File(
-                    "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
-
-            RandomAccessFile raf = new RandomAccessFile(file, "rw");
-
-            while (raf.getFilePointer() < raf.length()) {
-                buscaUsuarioAdmin = raf.readLine();
-                array = buscaUsuarioAdmin.split(",");
-                flagAdmin = array[6];
-
-                if (flagAdmin.equals("S")) {
-                    System.out.println("CADASTRO REALIZADO COM SUCESSO");
-                    return true;
-                }
-                // else{
-                // System.out.println("LOGIN ERRADO");
-                // return false;
-                // }
+    private static Boolean VerificaADM(ArrayList<Usuario> listaUsuarios, String U) {
+        String flagVerifica = "true";
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            if (U.equals(listaUsuarios.get(i).nomeUsuario) && flagVerifica.equals(listaUsuarios.get(i).flagAdmin)) {
+                System.out.println("CADASTRO DE ADMIN REALIZADO COM SUCESSO");
+                return true;
             }
-        } catch (IOException ioe) {
-            System.out.println(ioe);
-            return false;
         }
-        System.out.println("LOGIN ERRADO");
+        System.out.println("VOCE NAO É ADMIN");
         return false;
-
-    //     if (U.equals("user") && S.equals("senha")) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
     }
 }
