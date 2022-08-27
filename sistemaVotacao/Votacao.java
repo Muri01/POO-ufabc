@@ -1,17 +1,30 @@
-
 import java.util.Date;
 
 public class Votacao {
-    private String idVotacao;
     public String nomeVotacao;
     public String infoAdicionalVotacao;
-    private String criadoPor;
     public Date dataCriacaoVotacao;
     public Date dataInicial;
     public Date dataFinal;
-    public String[] canditos;
+    public String[] candidatos;
     public String[] votos;
     public String[] resultadoFinal;
+
+    //metodo construtor, que é chamado automaticamente sempre que um objeto é instanciado (não sei se precisa fazer)
+    public Votacao(String nome, String candidato1, String candidato2, int numVotos1, int numVotos2) {
+        nomeVotacao = nome;
+        candidatos[1] = candidato1;
+        candidatos[3] = candidato2;
+        Date data = new Date(); // Gera uma data
+        this.dataCriacaoVotacao = data;
+    }
+
+    public void detalhes(){
+        
+    }
+    public void resultado(){
+
+    }
 
 
 
