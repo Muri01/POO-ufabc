@@ -35,15 +35,18 @@ public class main {
             Usuario U = new Usuario(nome, senha, flag);
             listaUsuarios.add(U);
         }
-        
+
         //instanciar todos as votacoes a guardar em listaVotacao
         while (raf2.getFilePointer() < raf2.length()) { 
             linhaVotacao = raf2.readLine().split(",");
             nomeVotacao = linhaVotacao[0];
             canditado1 = linhaVotacao[1];
+            // num = Integer.parseInt(linhaVotacao[2]);
+            // System.out.println(num);
+            // num = linhaVotacao[2];
             numVotos1 = 1;
             canditado2 = linhaVotacao[3];
-            numVotos2 = 1;
+            numVotos2 = 2;
 
             // Votacao V = new Votacao(nomeVotacao, canditado1, canditado2, numVotos1, numVotos2);
             // listaVotacao.add(V);
@@ -165,11 +168,13 @@ public class main {
         // USUARIO COMUM
         else {
             //instâncias Usuario COMUM Auntenticado
-            flag = "true";
-            Usuario u2 = new Usuario(nome, senha, flag);
-            System.out.println("Bem vindo " + u2.nomeUsuario);
+            // flag = "true";
+            // Usuario u2 = new Usuario(nome, senha, flag);
+            // System.out.println("Bem vindo " + u2.nomeUsuario);
+            // System.out.println(Controle2);
             while (!Controle2.equals("0")) {
-                System.out.println("Bem vindo " + u2.nomeUsuario + " você não é admin");
+                // System.out.println("Bem vindo " + u2.nomeUsuario);
+                System.out.println(Controle2);
                 System.out.println("Digite um dos números abaixo ");
                 System.out.println("Votar: 1 ");
                 System.out.println("Cosultar resultados: 2");
@@ -197,7 +202,6 @@ public class main {
                 return true;
             }
         }
-        System.out.println("LOGIN ERRADO");
         return false;
     }
 
