@@ -6,20 +6,24 @@ import java.util.ArrayList;
 
 public class main {
 
+    private static Scanner scan;
+    private static RandomAccessFile raf;
+    private static RandomAccessFile raf2;
+
     public static void main(String[] args) throws IOException {
         ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
         ArrayList<Votacao> listaVotacao = new ArrayList<Votacao>();
         String linhaUsuario[], nome, senha, flag, Controle1 = "0", Controle2 = "0", linhaVotacao[], nomeVotacao, canditado1, canditado2;
-        int numVotos1, numVotos2;
+        int numVotos1, numVotos2, num;
         File file = new File(
                 "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
         File file2 = new File(
                 "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/votacao.csv");
 
         
-        RandomAccessFile raf = new RandomAccessFile(file, "rw");
-        RandomAccessFile raf2 = new RandomAccessFile(file2, "rw");
-        Scanner scan = new Scanner(System.in);
+        raf = new RandomAccessFile(file, "rw");
+        raf2 = new RandomAccessFile(file2, "rw");
+        scan = new Scanner(System.in);
 
         //instanciar todos os usuarios usuario a guardar em listaUsuarios
         while (raf.getFilePointer() < raf.length()) { 
@@ -31,17 +35,18 @@ public class main {
             Usuario U = new Usuario(nome, senha, flag);
             listaUsuarios.add(U);
         }
+        
         //instanciar todos as votacoes a guardar em listaVotacao
         while (raf2.getFilePointer() < raf2.length()) { 
             linhaVotacao = raf2.readLine().split(",");
             nomeVotacao = linhaVotacao[0];
             canditado1 = linhaVotacao[1];
-            numVotos1 = Integer.parseInt(linhaVotacao[2]);
+            numVotos1 = 1;
             canditado2 = linhaVotacao[3];
-            numVotos2 = Integer.parseInt(linhaVotacao[4]);
+            numVotos2 = 1;
 
-            Votacao V = new Votacao(nomeVotacao, canditado1, canditado2, numVotos1, numVotos2);
-            listaVotacao.add(V);
+            // Votacao V = new Votacao(nomeVotacao, canditado1, canditado2, numVotos1, numVotos2);
+            // listaVotacao.add(V);
         }
 
 
@@ -58,9 +63,16 @@ public class main {
             nome = scan.nextLine();
             System.out.println("Insira sua Senha: ");
             senha = scan.nextLine();
+            
         }
 
+
         if (VerificaADM(listaUsuarios, nome)) {
+            //instâncias Usuario ADMIN Auntenticado
+            flag = "true";
+            Usuario u1 = new Usuario(nome, senha, flag);
+            System.out.println("Bem vindo " + u1.nomeUsuario);
+
             while (!Controle1.equals("0")) {
                 Controle2 = "0";
                 System.out.println("Digite um dos números abaixo ");
@@ -152,7 +164,12 @@ public class main {
         
         // USUARIO COMUM
         else {
+            //instâncias Usuario COMUM Auntenticado
+            flag = "true";
+            Usuario u2 = new Usuario(nome, senha, flag);
+            System.out.println("Bem vindo " + u2.nomeUsuario);
             while (!Controle2.equals("0")) {
+                System.out.println("Bem vindo " + u2.nomeUsuario + " você não é admin");
                 System.out.println("Digite um dos números abaixo ");
                 System.out.println("Votar: 1 ");
                 System.out.println("Cosultar resultados: 2");

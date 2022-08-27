@@ -7,14 +7,15 @@ public class Votacao {
     public Date dataInicial;
     public Date dataFinal;
     public String[] candidatos;
-    public String[] votos;
-    public String[] resultadoFinal;
+    public int[] votos;
 
     //metodo construtor, que é chamado automaticamente sempre que um objeto é instanciado (não sei se precisa fazer)
     public Votacao(String nome, String candidato1, String candidato2, int numVotos1, int numVotos2) {
         nomeVotacao = nome;
-        candidatos[1] = candidato1;
-        candidatos[3] = candidato2;
+        candidatos[0] = candidato1;
+        votos[0] = numVotos1;
+        candidatos[1] = candidato2;
+        votos[1] = numVotos2;
         Date data = new Date(); // Gera uma data
         this.dataCriacaoVotacao = data;
     }
@@ -23,7 +24,15 @@ public class Votacao {
         
     }
     public void resultado(){
-
+        if(votos[0]>votos[1]){
+            System.out.println("O candidato vencedor é: " + candidatos[0]);
+        }
+        else if(votos[1]>votos[0]){
+            System.out.println("O candidato vencedor é: " + candidatos[1]);
+        }
+        else{
+            System.out.println("Houve EMPATE");
+        }
     }
 
 
