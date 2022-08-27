@@ -13,7 +13,7 @@ public class main {
     public static void main(String[] args) throws IOException {
         ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
         ArrayList<Votacao> listaVotacao = new ArrayList<Votacao>();
-        String linhaUsuario[], nome, senha, flag, Controle1 = "0", Controle2 = "0", linhaVotacao[], nomeVotacao, canditado1, canditado2;
+        String linhaUsuario[], nome, senha, flag, Controle1 = "0", Controle2 = "0", linhaVotacao[], nomeVotacao, canditado1, canditado2, numero;
         int numVotos1, numVotos2, num;
         File file = new File(
                 "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
@@ -36,17 +36,32 @@ public class main {
             listaUsuarios.add(U);
         }
 
-        //instanciar todos as votacoes a guardar em listaVotacao
+        //instanciar todos as votacoes a guardar em listaVotacao NAO ESTA MAIS FUNCIONADO
         while (raf2.getFilePointer() < raf2.length()) { 
             linhaVotacao = raf2.readLine().split(",");
             nomeVotacao = linhaVotacao[0];
             canditado1 = linhaVotacao[1];
-            // num = Integer.parseInt(linhaVotacao[2]);
-            // System.out.println(num);
-            // num = linhaVotacao[2];
-            numVotos1 = 1;
+            System.out.println(linhaVotacao[2]);
+
+            numero = linhaVotacao[2];
+            try {
+                num = Integer.parseInt(numero);
+            }
+            catch (NumberFormatException e) {
+                num = 0;
+            }
+            System.out.println(num);
+            numVotos1 = num;
             canditado2 = linhaVotacao[3];
-            numVotos2 = 2;
+            numero = linhaVotacao[4];
+            try {
+                num = Integer.parseInt(numero);
+            }
+            catch (NumberFormatException e) {
+                num = 0;
+            }
+            System.out.println(num);
+            numVotos2 = num;
 
             // Votacao V = new Votacao(nomeVotacao, canditado1, canditado2, numVotos1, numVotos2);
             // listaVotacao.add(V);
@@ -58,6 +73,8 @@ public class main {
         nome = scan.nextLine();
         System.out.println("Insira sua Senha: ");
         senha = scan.nextLine();
+        System.out.println(!Controle1.equals("0"));
+        System.out.println(!Controle2.equals("0"));
 
         //AUTENTICAÇÃO
         while (!Autenticao(listaUsuarios, nome, senha)) {
@@ -69,7 +86,7 @@ public class main {
             
         }
 
-
+        // USUARIO ADMIN
         if (VerificaADM(listaUsuarios, nome)) {
             //instâncias Usuario ADMIN Auntenticado
             flag = "true";
