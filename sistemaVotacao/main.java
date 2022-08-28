@@ -13,7 +13,7 @@ public class main {
     public static void main(String[] args) throws IOException {
         ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
         ArrayList<Votacao> listaVotacao = new ArrayList<Votacao>();
-        String linhaUsuario[], nome, senha, flag, Controle1 = "0", Controle2 = "0", linhaVotacao[], nomeVotacao, canditado1, canditado2, numero;
+        String linhaUsuario[], nome, senha, flag, Controle1 = "1", Controle2 = "0", linhaVotacao[], nomeVotacao, canditado1, canditado2, numero;
         int numVotos1, numVotos2, num;
         File file = new File(
                 "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
@@ -36,7 +36,7 @@ public class main {
             listaUsuarios.add(U);
         }
 
-        //instanciar todos as votacoes a guardar em listaVotacao NAO ESTA MAIS FUNCIONADO
+        //instanciar todos as votacoes a guardar em listaVotacao - NAO ESTA MAIS FUNCIONADO
         while (raf2.getFilePointer() < raf2.length()) { 
             linhaVotacao = raf2.readLine().split(",");
             nomeVotacao = linhaVotacao[0];
@@ -63,8 +63,8 @@ public class main {
             System.out.println(num);
             numVotos2 = num;
 
-            // Votacao V = new Votacao(nomeVotacao, canditado1, canditado2, numVotos1, numVotos2);
-            // listaVotacao.add(V);
+            Votacao V = new Votacao(nomeVotacao, canditado1, canditado2, numVotos1, numVotos2);
+            listaVotacao.add(V);
         }
 
 
@@ -185,10 +185,10 @@ public class main {
         // USUARIO COMUM
         else {
             //instâncias Usuario COMUM Auntenticado
-            // flag = "true";
-            // Usuario u2 = new Usuario(nome, senha, flag);
-            // System.out.println("Bem vindo " + u2.nomeUsuario);
-            // System.out.println(Controle2);
+            flag = "true";
+            Usuario u2 = new Usuario(nome, senha, flag);
+            System.out.println("Bem vindo " + u2.nomeUsuario);
+            System.out.println(Controle2);
             while (!Controle2.equals("0")) {
                 // System.out.println("Bem vindo " + u2.nomeUsuario);
                 System.out.println(Controle2);
