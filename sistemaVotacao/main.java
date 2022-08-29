@@ -13,7 +13,7 @@ public class main {
     public static void main(String[] args) throws IOException {
         ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
         ArrayList<Votacao> listaVotacao = new ArrayList<Votacao>();
-        String linhaUsuario[], nome, senha, flag, Controle1 = "1", Controle2 = "0", linhaVotacao[], nomeVotacao, canditado1, canditado2, numero;
+        String linhaUsuario[], nome, senha, flag, Controle1 = "9", Controle2 = "9", linhaVotacao[], nomeVotacao, canditado1, canditado2, numero;
         int numVotos1, numVotos2, num;
         File file = new File(
                 "/Users/murilosousa/Library/CloudStorage/GoogleDrive-murilodesousag@gmail.com/Meu Drive/_UFABC/_2022.2/POO - Programação Orientada a Objeto/PROJETO/POO-ufabc/sistemaVotacao/DataBase/User.csv");
@@ -41,7 +41,7 @@ public class main {
             linhaVotacao = raf2.readLine().split(",");
             nomeVotacao = linhaVotacao[0];
             canditado1 = linhaVotacao[1];
-            System.out.println(linhaVotacao[2]);
+            // System.out.println(linhaVotacao[2]);
 
             numero = linhaVotacao[2];
             try {
@@ -50,7 +50,7 @@ public class main {
             catch (NumberFormatException e) {
                 num = 0;
             }
-            System.out.println(num);
+            // System.out.println(num);
             numVotos1 = num;
             canditado2 = linhaVotacao[3];
             numero = linhaVotacao[4];
@@ -60,11 +60,11 @@ public class main {
             catch (NumberFormatException e) {
                 num = 0;
             }
-            System.out.println(num);
+            // System.out.println(num);
             numVotos2 = num;
 
-            Votacao V = new Votacao(nomeVotacao, canditado1, canditado2, numVotos1, numVotos2);
-            listaVotacao.add(V);
+            // Votacao V = new Votacao(nomeVotacao, canditado1, canditado2, numVotos1, numVotos2);
+            // listaVotacao.add(V);
         }
 
 
@@ -73,8 +73,8 @@ public class main {
         nome = scan.nextLine();
         System.out.println("Insira sua Senha: ");
         senha = scan.nextLine();
-        System.out.println(!Controle1.equals("0"));
-        System.out.println(!Controle2.equals("0"));
+        // System.out.println(!Controle1.equals("0"));
+        // System.out.println(!Controle2.equals("0"));
 
         //AUTENTICAÇÃO
         while (!Autenticao(listaUsuarios, nome, senha)) {
@@ -94,7 +94,7 @@ public class main {
             System.out.println("Bem vindo " + u1.nomeUsuario);
 
             while (!Controle1.equals("0")) {
-                Controle2 = "0";
+                Controle2 = "9";
                 System.out.println("Digite um dos números abaixo ");
                 System.out.println("Gerenciar Candidatos: 1");
                 System.out.println("Gerenciar Votações: 2");
@@ -104,6 +104,8 @@ public class main {
                 System.out.println("");
 
                 Controle1 = scan.nextLine();
+                // System.out.println(Controle1);
+                // System.out.println(Controle2);
 
                 //GERENCIAR CANDIDATOS
                 if (Controle1.equals("1")) {
@@ -152,15 +154,23 @@ public class main {
                     while (!Controle2.equals("0")) {
                         System.out.println("Adicionar Usuário: 1");
                         System.out.println("Excluir Usuário: 2");
-                        System.out.println("Sair: 0");
+                        System.out.println("Voltar: 0");
                         System.out.println("");
                         Controle2 = scan.nextLine();
-                        if (Controle2.equals("1")) {
-                            System.out.println("Executou adição de usuario");
-                            // adiciona usuario
-                        } else if (Controle2.equals("2")) {
-                            System.out.println("Executou exclusão");
-                            // função excluir usuário
+                        if (Controle2.equals("1")) { //Adicionar usuario
+                            System.out.println("Insira o NOME do novo usuário: ");
+                            nome = scan.nextLine();
+                            System.out.println("Insira a SENHA do novo usuário: ");
+                            senha = scan.nextLine();
+                            System.out.println("o novo usuário é admin? ");
+                            flag = scan.nextLine();
+                            u1.adicionarUsuario(nome, senha, flag);
+                            System.out.println("Novo usuário adicionado com sucesso! O que desaja fazer agora?");
+                        } else if (Controle2.equals("2")) { //excluir usuário
+                            System.out.println("Digite o nome de usuario que deseja excluir:");
+                            nome = scan.nextLine();
+                            u1.excluirUsuario(nome);
+                            System.out.println("Usuário excluido com sucesso! O que desaja fazer agora?");
                         }
                     }
                 }
