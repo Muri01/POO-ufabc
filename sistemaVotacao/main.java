@@ -139,6 +139,9 @@ public class main {
                         System.out.println("");
                         Controle2 = scan.nextLine();
                         if (Controle2.equals("1")) { // chama função votar
+                            //instanciar o arquivo de votacao e listar elas na tela
+
+
                             System.out.println("Digite o nome da votação");
                             String nomeVotacao = scan.nextLine();
                             System.out.println("Digite o nome do candidato");
@@ -181,7 +184,9 @@ public class main {
     private static Boolean Autenticao(ArrayList<Usuario> listaUsuarios, String U, String S) {
         for (int i=0; i < listaUsuarios.size(); i++) {
             if (U.equals(listaUsuarios.get(i).nomeUsuario) && S.equals(listaUsuarios.get(i).senhaUsuario)){
-                System.out.println("CADASTRO REALIZADO COM SUCESSO");
+                System.out.println("-------------------------------------------------------------------------------------------");
+                System.out.println("-----------------------CADASTRO REALIZADO COM SUCESSO--------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------");
                 return true;
             }
         }
@@ -192,11 +197,11 @@ public class main {
         String flagVerifica = "true";
         for (int i = 0; i < listaUsuarios.size(); i++) {
             if (U.equals(listaUsuarios.get(i).nomeUsuario) && flagVerifica.equals(listaUsuarios.get(i).flagAdmin)) {
-                System.out.println("CADASTRO DE ADMIN REALIZADO COM SUCESSO");
+                System.out.println("-----------------------Você é admin-----------------------------");
+                System.out.println("");
                 return true;
             }
         }
-        System.out.println("VOCE NAO É ADMIN");
         return false;
     }
 }

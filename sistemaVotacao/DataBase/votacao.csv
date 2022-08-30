@@ -1,1 +1,5 @@
-NomeVotacao;InformacaoAdicionalVotacao;DataFinal;[Candidato1, Candidato2, Candidato3];0,0,0
+1-NomeVotacao;InformacaoAdicionalVotacao;DataFinal;[Candidato1,Candidato2,Candidato3];0;0;0
+2-NomeVotacao;InformacaoAdicionalVotacao;DataFinal;[Candidato1,Candidato2,Candidato3];0;0;0
+3-NomeVotacao;InformacaoAdicionalVotacao;DataFinal;[Candidato1,Candidato2,Candidato3];0;0;0
+4-NomeVotacao;InformacaoAdicionalVotacao;DataFinal;[Candidato1,Candidato2,Candidato3];0;1;0;
+
