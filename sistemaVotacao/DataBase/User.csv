@@ -1,6 +1,6 @@
-nome,senha,flagAdmin
-user,senha,true
-humberto,admin,true
-murilo,admin,false
-test2,senha2,false
-test3,senha3,true
+nome;senha;flagAdmin
+user;senha;true
+humberto;admin;true
+murilo;admin;false
+test2;senha2;false
+test3;senha3;true
