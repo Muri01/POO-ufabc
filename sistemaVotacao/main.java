@@ -105,7 +105,6 @@ public class main {
                             // função excluir Votação
                         }
                     }
-
                 } 
                 
                 //GERENCIAR USUÁRIOS
@@ -124,12 +123,10 @@ public class main {
                             System.out.println("o novo usuário é admin? ");
                             flag = scan.nextLine();
                             u1.adicionarUsuario(nome, senha, flag);
-                            System.out.println("Novo usuário adicionado com sucesso! O que desaja fazer agora?");
                         } else if (Controle2.equals("2")) { //excluir usuário
                             System.out.println("Digite o nome de usuário que deseja excluir:");
                             nome = scan.nextLine();
                             u1.excluirUsuario(nome);
-                            System.out.println("Usuário excluido com sucesso! O que desaja fazer agora?");
                         }
                     }
                 }
@@ -142,7 +139,11 @@ public class main {
                         System.out.println("");
                         Controle2 = scan.nextLine();
                         if (Controle2.equals("1")) { // chama função votar
-                            u1.votar();
+                            System.out.println("Digite o nome da votação");
+                            String nomeVotacao = scan.nextLine();
+                            System.out.println("Digite o nome do candidato");
+                            String nomeCandidato = scan.nextLine();
+                            u1.votar(nomeVotacao, nomeCandidato);
                             
                         }
                     }
