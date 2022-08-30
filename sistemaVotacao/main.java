@@ -105,7 +105,6 @@ public class main {
                             // função excluir Votação
                         }
                     }
-
                 } 
                 
                 //GERENCIAR USUÁRIOS
@@ -124,12 +123,10 @@ public class main {
                             System.out.println("o novo usuário é admin? ");
                             flag = scan.nextLine();
                             u1.adicionarUsuario(nome, senha, flag);
-                            System.out.println("Novo usuário adicionado com sucesso! O que desaja fazer agora?");
                         } else if (Controle2.equals("2")) { //excluir usuário
                             System.out.println("Digite o nome de usuário que deseja excluir:");
                             nome = scan.nextLine();
                             u1.excluirUsuario(nome);
-                            System.out.println("Usuário excluido com sucesso! O que desaja fazer agora?");
                         }
                     }
                 }
@@ -142,7 +139,14 @@ public class main {
                         System.out.println("");
                         Controle2 = scan.nextLine();
                         if (Controle2.equals("1")) { // chama função votar
-                            u1.votar();
+                            //instanciar o arquivo de votacao e listar elas na tela
+
+
+                            System.out.println("Digite o nome da votação");
+                            String nomeVotacao = scan.nextLine();
+                            System.out.println("Digite o nome do candidato");
+                            String nomeCandidato = scan.nextLine();
+                            u1.votar(nomeVotacao, nomeCandidato);
                             
                         }
                     }
@@ -180,7 +184,9 @@ public class main {
     private static Boolean Autenticao(ArrayList<Usuario> listaUsuarios, String U, String S) {
         for (int i=0; i < listaUsuarios.size(); i++) {
             if (U.equals(listaUsuarios.get(i).nomeUsuario) && S.equals(listaUsuarios.get(i).senhaUsuario)){
-                System.out.println("CADASTRO REALIZADO COM SUCESSO");
+                System.out.println("-------------------------------------------------------------------------------------------");
+                System.out.println("-----------------------CADASTRO REALIZADO COM SUCESSO--------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------");
                 return true;
             }
         }
@@ -191,11 +197,11 @@ public class main {
         String flagVerifica = "true";
         for (int i = 0; i < listaUsuarios.size(); i++) {
             if (U.equals(listaUsuarios.get(i).nomeUsuario) && flagVerifica.equals(listaUsuarios.get(i).flagAdmin)) {
-                System.out.println("CADASTRO DE ADMIN REALIZADO COM SUCESSO");
+                System.out.println("-----------------------Você é admin-----------------------------");
+                System.out.println("");
                 return true;
             }
         }
-        System.out.println("VOCE NAO É ADMIN");
         return false;
     }
 }
